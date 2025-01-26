@@ -1,0 +1,54 @@
+class TreeNode{
+    int val;
+    TreeNode left,right;
+    TreeNode(int x){
+        val=x;
+    }
+    
+}
+class isCousingInBinaryTree{
+    TreeNode parentX=null, parentY=null;
+    
+    int depthX=-1,depthY=-1;
+    
+    public boolean iscousin(TreeNode root,int x,int y){
+        
+        findDepthAndParent(root,x,y,0,null);
+        return depthX==depthY && parentX!=parentY;
+        
+    }
+    private void findDepthAndParent(TreeNode node,int x,int y,int depth,TreeNode parent){
+        
+        if(node==null){
+            return;
+        }
+        else if(node.val==x){
+            parentX=parent;
+            depthX=depth;
+        }
+        else if(node.val==y){
+            parentY=parent;
+            depthY=depth;
+        }
+        findDepthAndParent(node.left,x,y,depth+1,node);
+        findDepthAndParent(node.right,x,y,depth+1,node);
+    }
+    
+}
+public class Main
+{
+	public static void main(String[] args) {
+		TreeNode node=new TreeNode(1);
+		node.left=new TreeNode(2);
+		node.right=new TreeNode(3);
+		node.left.left=new TreeNode(4);
+		node.left.right=new TreeNode(5);
+		node.right.left=new TreeNode(6);
+		
+		isCousingInBinaryTree obj=new isCousingInBinaryTree();
+		System.out.println(obj.iscousin(node,4,5));
+		
+		
+		
+	}
+}
