@@ -1,0 +1,36 @@
+class TreeNode{
+    int val;
+    TreeNode left,right;
+    TreeNode(int x){
+        val=x;
+    }
+}
+class isSymmetric{
+    public boolean isSymmetric(TreeNode node){
+        if(node==null) return true;
+        return isMirror(node.left, node.right);
+                 
+    }
+    private boolean isMirror(TreeNode t1,TreeNode t2){
+        
+      if(t1==null && t2==null) return true;
+        if(t1==null || t2==null) return false;
+        return (t1.val==t2.val) && isMirror(t1.left,t2.right) && isMirror(t1.right,t2.left);
+        
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+		TreeNode node=new TreeNode(1);
+		node.left=new TreeNode(2);
+		node.right=new TreeNode(2);
+		node.left.left=new TreeNode(4);
+		node.left.right=new TreeNode(5);
+		node.right.left=new TreeNode(5);
+		node.right.right=new TreeNode(4);
+		isSymmetric sym=new isSymmetric();
+		System.out.println(sym.isSymmetric(node));
+	}
+}
